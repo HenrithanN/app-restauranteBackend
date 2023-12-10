@@ -1,4 +1,5 @@
 const LoginModel = require('../models/LoginModel');
+const ErroService = require('../uteis/ErroService');
 
 class LoginController {
 
@@ -11,17 +12,11 @@ class LoginController {
             if(EMAIL.toUpperCase() == emailLogin.toUpperCase() && SENHA == req.body.senha){
                 return res.status(200).json({Autenticado: true});
             }else{
-                const objError = {
-                    Mensagem: 'Acesso não autorizado.',
-                    DetalhesAdicionais: ["Usuário ou senha Inválidos!"]
-                }
+                const objError = ErroService.MontaObjErro('Acesso não autorizado.', ["Usuário ou senha Inválidos!"])
                 return res.status(401).json(objError);
             }
         }else{
-            const objError = {
-                Mensagem: 'Acesso não autorizado.',
-                DetalhesAdicionais: ["Usuário não existe!"]
-            }
+            const objError = ErroService.MontaObjErro('Acesso não autorizado.', ["Usuário não existe!"])
             return res.status(401).json(objError);
         }
     }
@@ -31,10 +26,7 @@ class LoginController {
         const buscarUmLoginResponse$ = await LoginModel.BuscarUmLogin(emailLogin);
 
         if(buscarUmLoginResponse$.length > 0){
-            const objError = {
-                Mensagem: 'Não foi Possível Realizar o Cadastro.',
-                DetalhesAdicionais: ["Usuário ja está cadastrado na Base de Dados!"]
-            }
+            const objError = ErroService.MontaObjErro('Não foi Possível Realizar o Cadastro.', ["Usuário ja está cadastrado na Base de Dados!"]);
             return res.status(400).json(objError);
         }else{
             const salvarLoginResponse$ = await LoginModel.SalvarLogin(req.body);
