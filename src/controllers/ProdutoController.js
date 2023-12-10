@@ -1,15 +1,15 @@
 const ProdutoModel = require('../models/ProdutoModel');
 
-class RestauranteController {
+class ProdutoController {
     
-    async SalvarRestaurante(req, res){
-        const salvarRestauranteResponse$ = await ProdutoModel.SalvarProduto(req.body);
-        return res.status(200).json(salvarRestauranteResponse$);
+    async SalvarProduto(req, res){
+        const salvarProdutoResponse$ = await ProdutoModel.SalvarProduto(req.body);
+        return res.status(200).json(salvarProdutoResponse$);
     }
 
-    async BuscarTodosRestaurantes(_req, res){
-        const buscarTodosRestaurantesResponse$ = await ProdutoModel.BuscarTodosProdutos();
-        return res.status(200).json(buscarTodosRestaurantesResponse$)
+    async BuscarTodosProdutos(_req, res){
+        const buscarTodosProdutosResponse$ = await ProdutoModel.BuscarTodosProdutos();
+        return res.status(200).json(buscarTodosProdutosResponse$)
     }
 
     async BuscarProdutosPorIdRestaurante(req, res){
@@ -35,4 +35,4 @@ class RestauranteController {
     }
 }
 
-module.exports = new RestauranteController;
+module.exports = new ProdutoController;
