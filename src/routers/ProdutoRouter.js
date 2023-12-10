@@ -1,11 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const RestauranteController = require('../controllers/RestauranteController');
+const ProdutoController = require('../controllers/ProdutoController');
 
-router.post('/salvar', RestauranteController.SalvarRestaurante);
-router.get('/listarTodos', RestauranteController.BuscarTodosRestaurantes);
-router.get('/listarUm', RestauranteController.BuscarUmRestaurante);
-router.post('/atualizar', RestauranteController.AtualizarRestaurante);
-router.delete('/deletar/:id', RestauranteController.DeletarRestaurante);
+router.post('/salvar', ProdutoController.SalvarProduto);
+router.get('/listarTodos', ProdutoController.BuscarTodosProdutos);
+router.get('/listarProdutoPorIdRestaurante', ProdutoController.BuscarProdutosPorIdRestaurante);
+router.get('/listarUm', ProdutoController.BuscarUmProduto);
+router.post('/atualizar', ProdutoController.AtualizarProduto);
+router.delete('/deletar/:id', ProdutoController.DeletarProduto);
 
 module.exports = router;
