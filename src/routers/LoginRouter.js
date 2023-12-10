@@ -3,6 +3,7 @@ const router = express.Router();
 const LoginController = require('../controllers/LoginController');
 
 router.post('/cadastrar', LoginController.SalvarLogin);
+router.post('/alterarSenha', LoginController.AtualizarLogin);
 router.post('/autenticar', LoginController.AutenticarLogin);
 router.post('/deletar', LoginController.DeletarLogin);
 router.post('/listarUm', LoginController.BuscarUmLogin);

@@ -46,8 +46,20 @@ class LoginController {
     }
 
     async AtualizarLogin(req, res){
-        const atualizarLoginResponse$ = await LoginModel.AtualizarLogin(req.body);
-        return res.status(200).json(atualizarLoginResponse$);
+        const { email, senha, senhaConfirmacao} = req.body
+        if(senha != senhaConfirmacao){
+            const objError = ErroService.MontaObjErro('Não foi Possível Alterar a Senha.', ["As senhas informadas são diferentes!"]);
+            return res.status(400).json(objError);
+        }
+        const buscarUmLoginResponse$ = await LoginModel.BuscarUmLogin(email);
+
+        if(buscarUmLoginResponse$.length == 0){
+            const objError = ErroService.MontaObjErro('Não foi Possível Alterar a Senha.', ["O usuário informado não foi encontrado!"]);
+            return res.status(400).json(objError);
+        }else{
+            const atualizarLoginResponse$ = await LoginModel.AtualizarLogin(req.body);
+            return res.status(200).json(atualizarLoginResponse$);
+        }
     }
 
     async DeletarLogin(req, res){
