@@ -1,13 +1,14 @@
 const connection = require('./connection');
 
 const tabelaPrincipal = 'PRODUTOS';
+const tabelaRestaurantes = 'RESTAURANTES';
 
 class ProdutoModel {
     
     async SalvarProduto(objProduto){
-        const query = `INSERT INTO ${tabelaPrincipal}(NOME, DESCRICAO, NOTA, TEMPOENTREGA, VALORENTREGA) VALUES (?, ?, ?, ?, ?)`;
-        const { nome, descricao, nota, tempoEntrega, valorEntrega } = objProduto;
-        const [createProduto] = await connection.execute(query, [nome, descricao, nota, tempoEntrega, valorEntrega]);
+        const query = `INSERT INTO ${tabelaPrincipal}(NOME, DESCRICAO, VALOR, IMAGEM, IDRESTAURANTE) VALUES (?, ?, ?, ?, ?)`;
+        const { nome, descricao, valor, imagem, idRestaurante } = objProduto;
+        const [createProduto] = await connection.execute(query, [nome, descricao, valor, imagem, idRestaurante]);
         return createProduto;
     }
 
@@ -18,7 +19,8 @@ class ProdutoModel {
     }
 
     async BuscarProdutosPorIdRestaurante(idRestaurante){
-        const query = `SELECT * FROM ${tabelaPrincipal} WHERE IDRESTAURANTE = ?`;
+        const query = `SELECT * FROM ${tabelaPrincipal} tp inner join ${tabelaRestaurantes} tr
+        ON tp.IDRESTAURANTE = tr.IDRESTAURANTE WHERE tp.IDRESTAURANTE = ?`;
         const [readProdutos] = await connection.execute(query, [idRestaurante]);
         return readProdutos;
     }

@@ -14,9 +14,14 @@ class ProdutoController {
     }
 
     async BuscarProdutosPorIdRestaurante(req, res){
-        const idRestaurante = req.body.idRestaurante;
+        const idRestaurante = req.params.idRestaurante;
         const BuscarProdutosPorIdRestauranteResponse$ = await ProdutoModel.BuscarProdutosPorIdRestaurante(idRestaurante);
-        return res.status(200).json(BuscarProdutosPorIdRestauranteResponse$)
+        if(BuscarProdutosPorIdRestauranteResponse$.length > 0){
+            return res.status(200).json(BuscarProdutosPorIdRestauranteResponse$)
+        }else{
+            const objError = ErroService.MontaObjErro('Não foi encontrado nenhum produto para este restaurante.');
+            return res.status(404).json(objError)
+        }
     }
 
     async BuscarUmProduto(req, res){
