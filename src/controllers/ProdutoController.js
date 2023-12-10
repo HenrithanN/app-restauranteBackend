@@ -1,4 +1,5 @@
 const ProdutoModel = require('../models/ProdutoModel');
+const ErroService = require('../uteis/ErroService');
 
 class ProdutoController {
     
@@ -20,7 +21,12 @@ class ProdutoController {
 
     async BuscarUmProduto(req, res){
         const buscarUmProdutoResponse$ = await ProdutoModel.BuscarUmProduto(req.body.idProduto);
-        return res.status(200).json(buscarUmProdutoResponse$)
+        if(buscarUmProdutoResponse$.length > 0){
+            return res.status(200).json(buscarUmProdutoResponse$)
+        }else{
+            const objError = ErroService.MontaObjErro('Produto não encontrado.');
+            return res.status(404).json(objError)
+        }
     }
 
     async AtualizarProduto(req, res){
