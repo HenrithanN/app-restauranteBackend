@@ -7,6 +7,7 @@ class ErroService {
 
         return objError
     }
+    //teste
 }
 
 module.exports = new ErroService;
