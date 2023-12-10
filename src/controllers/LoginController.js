@@ -1,5 +1,6 @@
 const LoginModel = require('../models/LoginModel');
 const ErroService = require('../uteis/ErroService');
+const TokenService = require('../uteis/TokenService');
 
 class LoginController {
 
@@ -9,7 +10,8 @@ class LoginController {
         
         if(autenticarLoginResponse$.length > 0){
             const { EMAIL, SENHA } = autenticarLoginResponse$[0];
-            if(EMAIL.toUpperCase() == emailLogin.toUpperCase() && SENHA == req.body.senha){
+            const decodedSenha = TokenService.verify(SENHA);
+            if(EMAIL.toUpperCase() == emailLogin.toUpperCase() && decodedSenha.secure == req.body.senha){
                 return res.status(200).json({Autenticado: true});
             }else{
                 const objError = ErroService.MontaObjErro('Acesso não autorizado.', ["Usuário ou senha Inválidos!"])
@@ -29,6 +31,8 @@ class LoginController {
             const objError = ErroService.MontaObjErro('Não foi Possível Realizar o Cadastro.', ["Usuário ja está cadastrado na Base de Dados!"]);
             return res.status(400).json(objError);
         }else{
+            const jwtSenha = TokenService.generate(req.body.senha);
+            req.body.senha = jwtSenha.token;
             const salvarLoginResponse$ = await LoginModel.SalvarLogin(req.body);
             return res.status(200).json(salvarLoginResponse$);
         }
@@ -57,6 +61,8 @@ class LoginController {
             const objError = ErroService.MontaObjErro('Não foi Possível Alterar a Senha.', ["O usuário informado não foi encontrado!"]);
             return res.status(400).json(objError);
         }else{
+            const jwtSenha = TokenService.generate(req.body.senha);
+            req.body.senha = jwtSenha.token;
             const atualizarLoginResponse$ = await LoginModel.AtualizarLogin(req.body);
             return res.status(200).json(atualizarLoginResponse$);
         }

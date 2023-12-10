@@ -19,7 +19,8 @@ class ProdutoModel {
     }
 
     async BuscarProdutosPorIdRestaurante(idRestaurante){
-        const query = `SELECT * FROM ${tabelaPrincipal} tp inner join ${tabelaRestaurantes} tr
+        const query = `SELECT tp.ID, tp.NOME, tp.DESCRICAO, tp.VALOR, tp.IMAGEM 
+        FROM ${tabelaPrincipal} tp inner join ${tabelaRestaurantes} tr
         ON tp.IDRESTAURANTE = tr.IDRESTAURANTE WHERE tp.IDRESTAURANTE = ?`;
         const [readProdutos] = await connection.execute(query, [idRestaurante]);
         return readProdutos;
