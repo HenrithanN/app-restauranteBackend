@@ -18,7 +18,7 @@ class RestauranteModel {
     }
 
     async BuscarUmRestaurante(idRestaurante){
-        const query = `SELECT * FROM ${tabelaPrincipal} WHERE ID = ?`;
+        const query = `SELECT * FROM ${tabelaPrincipal} WHERE IDRESTAURANTE = ?`;
         const [readRestaurante] = await connection.execute(query, [idRestaurante]);
         return readRestaurante;
     }
@@ -31,7 +31,7 @@ class RestauranteModel {
     }
 
     async DeletarRestaurante(idRestaurante){
-        const query = `DELETE FROM ${tabelaPrincipal} WHERE ID = ?`;
+        const query = `DELETE FROM ${tabelaPrincipal} WHERE IDRESTAURANTE = ?`;
         const [deleteRestaurante] = await connection.execute(query, [idRestaurante]);
         return deleteRestaurante;
     }

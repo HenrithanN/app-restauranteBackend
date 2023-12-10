@@ -4,7 +4,7 @@ const RestauranteController = require('../controllers/RestauranteController');
 
 router.post('/salvar', RestauranteController.SalvarRestaurante);
 router.get('/listarTodos', RestauranteController.BuscarTodosRestaurantes);
-router.get('/listarUm', RestauranteController.BuscarUmRestaurante);
+router.get('/listarUm/:idRestaurante', RestauranteController.BuscarUmRestaurante);
 router.post('/atualizar', RestauranteController.AtualizarRestaurante);
 router.delete('/deletar/:id', RestauranteController.DeletarRestaurante);
 

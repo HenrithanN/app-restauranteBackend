@@ -1,4 +1,5 @@
 const RestauranteModel = require('../models/RestauranteModel');
+const ErroService = require('../uteis/ErroService');
 
 class RestauranteController {
     
@@ -13,8 +14,14 @@ class RestauranteController {
     }
 
     async BuscarUmRestaurante(req, res){
-        const buscarUmRestauranteResponse$ = await RestauranteModel.BuscarUmRestaurante(req.body.idRestaurante);
-        return res.status(200).json(buscarUmRestauranteResponse$)
+        const idRestaurante = req.params.idRestaurante
+        const buscarUmRestauranteResponse$ = await RestauranteModel.BuscarUmRestaurante(idRestaurante);
+        if(buscarUmRestauranteResponse$.length > 0){
+            return res.status(200).json(buscarUmRestauranteResponse$)
+        }else{
+            const objError = ErroService.MontaObjErro('Restaurante não encontrado.');
+            return res.status(404).json(objError)
+        }
     }
 
     async AtualizarRestaurante(req, res){
