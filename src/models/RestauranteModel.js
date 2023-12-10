@@ -24,7 +24,7 @@ class RestauranteModel {
     }
 
     async AtualizarRestaurante(objRestaurante){
-        const query = `UPDATE ${tabelaPrincipal} SET NOME = ?, DESCRICAO = ?, NOTA = ?, TEMPOENTREGA = ?, VALORENTREGA = ?, IMAGEM = ? WHERE ID = ?`;
+        const query = `UPDATE ${tabelaPrincipal} SET NOME = ?, DESCRICAO = ?, NOTA = ?, TEMPOENTREGA = ?, VALORENTREGA = ?, IMAGEM = ? WHERE IDRESTAURANTE = ?`;
         const { id, nome, descricao, nota, tempoEntrega, valorEntrega, imagem } = objRestaurante;
         const [updateRestaurante] = await connection.execute(query, [nome, descricao, nota, tempoEntrega, valorEntrega, imagem, id]);
         return updateRestaurante;
