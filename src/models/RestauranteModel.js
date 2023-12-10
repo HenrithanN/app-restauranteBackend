@@ -5,9 +5,9 @@ const tabelaPrincipal = 'RESTAURANTES';
 class RestauranteModel {
     
     async SalvarRestaurante(objRestaurante){
-        const query = `INSERT INTO ${tabelaPrincipal}(NOME, DESCRICAO, NOTA, TEMPOENTREGA, VALORENTREGA) VALUES (?, ?, ?, ?, ?)`;
-        const { nome, descricao, nota, tempoEntrega, valorEntrega } = objRestaurante;
-        const [createRestaurante] = await connection.execute(query, [nome, descricao, nota, tempoEntrega, valorEntrega]);
+        const query = `INSERT INTO ${tabelaPrincipal}(NOME, DESCRICAO, NOTA, TEMPOENTREGA, VALORENTREGA, IMAGEM) VALUES (?, ?, ?, ?, ?)`;
+        const { nome, descricao, nota, tempoEntrega, valorEntrega, imagem } = objRestaurante;
+        const [createRestaurante] = await connection.execute(query, [nome, descricao, nota, tempoEntrega, valorEntrega, imagem]);
         return createRestaurante;
     }
 
@@ -24,9 +24,9 @@ class RestauranteModel {
     }
 
     async AtualizarRestaurante(objRestaurante){
-        const query = `UPDATE ${tabelaPrincipal} SET NOME = ?, DESCRICAO = ?, NOTA = ?, TEMPOENTREGA = ?, VALORENTREGA = ? WHERE ID = ?`;
-        const { id, nome, descricao, nota, tempoEntrega, valorEntrega } = objRestaurante;
-        const [updateRestaurante] = await connection.execute(query, [nome, descricao, nota, tempoEntrega, valorEntrega, id]);
+        const query = `UPDATE ${tabelaPrincipal} SET NOME = ?, DESCRICAO = ?, NOTA = ?, TEMPOENTREGA = ?, VALORENTREGA = ?, IMAGEM = ? WHERE ID = ?`;
+        const { id, nome, descricao, nota, tempoEntrega, valorEntrega, imagem } = objRestaurante;
+        const [updateRestaurante] = await connection.execute(query, [nome, descricao, nota, tempoEntrega, valorEntrega, imagem, id]);
         return updateRestaurante;
     }
 
