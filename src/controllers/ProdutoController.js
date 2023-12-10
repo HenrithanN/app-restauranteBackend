@@ -25,7 +25,8 @@ class ProdutoController {
     }
 
     async BuscarUmProduto(req, res){
-        const buscarUmProdutoResponse$ = await ProdutoModel.BuscarUmProduto(req.body.idProduto);
+        const idProduto = req.params.idProduto
+        const buscarUmProdutoResponse$ = await ProdutoModel.BuscarUmProduto(idProduto);
         if(buscarUmProdutoResponse$.length > 0){
             return res.status(200).json(buscarUmProdutoResponse$)
         }else{

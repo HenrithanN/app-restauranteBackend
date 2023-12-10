@@ -5,7 +5,7 @@ const ProdutoController = require('../controllers/ProdutoController');
 router.post('/salvar', ProdutoController.SalvarProduto);
 router.get('/listarTodos', ProdutoController.BuscarTodosProdutos);
 router.get('/listarProdutoPorIdRestaurante/:idRestaurante', ProdutoController.BuscarProdutosPorIdRestaurante);
-router.post('/listarUm', ProdutoController.BuscarUmProduto);
+router.get('/listarUm/:idProduto', ProdutoController.BuscarUmProduto);
 router.post('/atualizar', ProdutoController.AtualizarProduto);
 router.delete('/deletar/:id', ProdutoController.DeletarProduto);
 
