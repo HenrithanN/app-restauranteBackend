@@ -14,7 +14,7 @@ class UsuarioController {
 
     async BuscarUmUsuario(req, res){
         const buscarUmUsuarioResponse$ = await UsuarioModel.BuscarUmUsuario(req.body.email);
-        return res.status(200).json(buscarUmUsuarioResponse$)
+        return res.status(200).json(buscarUmUsuarioResponse$);
     }
 
     async AtualizarUsuario(req, res){
