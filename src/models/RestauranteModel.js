@@ -5,7 +5,7 @@ const tabelaPrincipal = 'RESTAURANTES';
 class RestauranteModel {
     
     async SalvarRestaurante(objRestaurante){
-        const query = `INSERT INTO ${tabelaPrincipal}(NOME, DESCRICAO, NOTA, TEMPOENTREGA, VALORENTREGA, IMAGEM) VALUES (?, ?, ?, ?, ?)`;
+        const query = `INSERT INTO ${tabelaPrincipal}(NOME, DESCRICAO, NOTA, TEMPOENTREGA, VALORENTREGA, IMAGEM) VALUES (?, ?, ?, ?, ?, ?)`;
         const { nome, descricao, nota, tempoEntrega, valorEntrega, imagem } = objRestaurante;
         const [createRestaurante] = await connection.execute(query, [nome, descricao, nota, tempoEntrega, valorEntrega, imagem]);
         return createRestaurante;
