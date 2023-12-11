@@ -31,7 +31,7 @@ class LoginModel {
     }
 
     async DeletarLogin(emailLogin){
-        const query = `DELETE FROM ${tabelaPrincipal} WHERE ID = ?`;
+        const query = `DELETE FROM ${tabelaPrincipal} WHERE EMAIL = ?`;
         const [deleteLogin] = await connection.execute(query, [emailLogin]);
         return deleteLogin;
     }
