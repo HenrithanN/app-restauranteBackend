@@ -7,7 +7,7 @@ class UsuarioModel {
     async SalvarUsuario(objUsuario){
         const query = `INSERT INTO ${tabelaPrincipal}(NOME, EMAIL, CPF, SENHA) VALUES (?, ?, ?, ?)`;
         const { nome, cpf, email, senha } = objUsuario;
-        const [createUsuario] = await connection.execute(query, [nome, cpf, email, senha]);
+        const [createUsuario] = await connection.execute(query, [nome, email, cpf, senha]);
         return createUsuario;
     }
 
@@ -17,9 +17,9 @@ class UsuarioModel {
         return readUsuarios;
     }
 
-    async BuscarUmUsuario(idUsuario){
-        const query = `SELECT * FROM ${tabelaPrincipal} WHERE ID = ?`;
-        const [readUsuarios] = await connection.execute(query, [idUsuario]);
+    async BuscarUmUsuario(emailUsuario){
+        const query = `SELECT * FROM ${tabelaPrincipal} WHERE EMAIL = ?`;
+        const [readUsuarios] = await connection.execute(query, [emailUsuario]);
         return readUsuarios;
     }
 
